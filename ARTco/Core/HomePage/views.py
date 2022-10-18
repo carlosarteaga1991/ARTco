@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import *
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
@@ -8,3 +8,6 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['demo'] = 'Demo'
         return context
+
+#class DatosVisitaView(TemplateView):
+    
