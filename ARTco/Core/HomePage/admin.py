@@ -1,3 +1,4 @@
 from django.contrib import admin
+from Core.HomePage.models import visitas
 
-# Register your models here.
+admin.site.register(visitas)
