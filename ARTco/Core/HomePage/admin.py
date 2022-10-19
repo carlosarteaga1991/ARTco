@@ -1,4 +1,4 @@
 from django.contrib import admin
-from Core.HomePage.models import visitas
+from Core.HomePage.models import Visita
 
-admin.site.register(visitas)
+admin.site.register(Visita)

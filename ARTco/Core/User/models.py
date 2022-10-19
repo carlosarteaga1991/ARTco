@@ -1,3 +1,204 @@
+from email.policy import default
+from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.utils.translation import model_to_dict
 
-# Create your models here.
+
+
+class Perfil_Usuario(AbstractBaseUser):
+    id_rol = models.AutoField(primary_key=True)
+    nombre = models.CharField('Nombre',max_length=100, unique=True)
+    tiene_permisos = models.CharField(max_length=2, default='No',choices=[('Si','Si'),('No','No')])
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
+    fch_modificacion = models.CharField(max_length=35, blank=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
+    borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+
+    def __str__(self):
+        return self.nombre
+    
+    def toJSON(self): 
+        item = model_to_dict(self, exclude=['usuario_modificacion'])
+        return item
+
+    class Meta:
+        verbose_name_plural = "Perfil de Usuarios"
+        ordering = ['id_rol']
+
+class UsuarioManager(BaseUserManager):
+    def create_user(self,email,username,nombres,apellidos,id_departamento,id_puesto,password = None):
+        if not email:
+            raise ValueError('El usuario debe tener un correo electrónico')
+        
+        user = self.model(
+            username = username,
+            email = self.normalize_email(email),
+            nombres = nombres,
+            apellidos = apellidos,
+            id_departamento = int(id_departamento),
+            id_puesto = int(id_puesto)
+        )
+
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self,username,email,nombres,apellidos,password,id_departamento,id_puesto, **other_fields):
+
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_superuser', True)
+
+        user = self.create_user(
+            email,
+            username = username,
+            nombres = nombres,
+            apellidos = apellidos,
+            password = password,
+            id_departamento = int(id_departamento),
+            id_puesto = int(id_puesto)
+        )
+        #user.usuario_administrador = True
+        user.save()
+        return user
+
+class Pantalla(models.Model):
+    id_pantalla = models.AutoField(primary_key=True)
+    nombre_pantalla = models.CharField('Pantalla',max_length=100, unique=True)
+
+    class Meta:
+        verbose_name_plural = "Pantallas"
+        ordering = ['id_pantalla']
+
+class Permiso(models.Model):
+    id_permiso = models.AutoField(primary_key=True)
+    id_rol = models.ForeignKey(Perfil_Usuario,on_delete=models.PROTECT,verbose_name="Perfil de Usuario")
+    id_pantalla = models.ForeignKey(Pantalla,on_delete=models.PROTECT,verbose_name="Pantalla")
+    ver = models.CharField(max_length=1, default='1',choices=[('1','Si'),('0','No')])
+    actualizar = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    crear = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    borrar = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
+    fch_modificacion = models.CharField(max_length=35, blank=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
+    borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+
+    def __str__(self):
+        return self.pantalla
+    
+    def toJSON(self): 
+        item = model_to_dict(self, exclude=['usuario_modificacion'])
+        return item
+
+    class Meta:
+        verbose_name_plural = "Permisos"
+        ordering = ['id_permiso']
+
+class Departamento(models.Model):
+    id_departamento = models.AutoField(primary_key=True)
+    nombre_departamento = models.CharField('Nombre Departamento',max_length=100, unique=True)
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
+    fch_modificacion = models.CharField(max_length=35, blank=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
+    borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+
+    def __str__(self):
+        return self.nombre
+    
+    def toJSON(self): #función para crear diccionarios que se envían en la vista
+        item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
+        return item
+
+    class Meta:
+        verbose_name_plural = "Departamentos"
+        ordering = ['id_departamento']
+
+class Puesto(models.Model):
+    id_puesto = models.AutoField(primary_key=True)
+    id_departamento = models.ForeignKey(Departamento, on_delete=models.PROTECT) #protege en caso de querer borrar
+    nombre_puesto = models.CharField(max_length=100)
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
+    fch_modificacion = models.CharField(max_length=35, blank=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
+    borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+
+    def __str__(self):
+        return self.nombre
+    
+    def toJSON(self): #función para crear diccionarios que se envían en la vista
+        item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
+        return item
+
+    class Meta:
+        verbose_name_plural = "Puestos" #para que no le agrega una ese en el admin panel de django
+        ordering = ['id_puesto']
+
+class Usuario(AbstractBaseUser):
+    username = models.CharField('Usuario',max_length=20, unique=True)
+    email = models.EmailField('Correo Electrónico', max_length=70,unique=True)
+    nombres = models.CharField('Nombres',max_length=30,blank= True, null = True)
+    apellidos = models.CharField('Apellidos',max_length=30,blank= True, null = True)
+    id_departamento = models.ForeignKey(Departamento,on_delete=models.PROTECT,verbose_name="Departamento")
+    id_puesto = models.ForeignKey(Puesto,on_delete=models.PROTECT,verbose_name="Puesto")
+    ip_ultimo_acceso = models.CharField(max_length=50, blank=True)
+    usuario_creacion = models.IntegerField(blank=True, null=True)
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    fch_modificacion = models.DateTimeField(null=True)
+    fch_cambio_password = models.DateTimeField(null=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField('Estado',max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
+    borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    primer_ingreso = models.IntegerField(default=1,blank=True,null=True)
+    cambiar_contrasenia = models.CharField(max_length=1, default='1',choices=[('1','Si'),('0','No')])
+    bloqueado = models.CharField(max_length=1, default='0',choices=[('1','Bloqueado'),('0','Desbloqueado')])
+    img_user = models.ImageField('Imagen de Perfil', height_field=None,width_field=None,blank=True,null=True, max_length=200)
+    id_rol = models.ForeignKey(Perfil_Usuario,on_delete=models.PROTECT,verbose_name="Perfil de Usuario",null=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default = False)
+    objects = UsuarioManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email','nombres','id_departamento','id_puesto']
+
+    def __str__(self):
+        return self.username
+    
+    def has_perm(self,perm,obj = None):
+        return True
+    
+    def has_module_perms(self,app_label):
+        return True
+
+    class Meta:
+        verbose_name_plural = "Usuarios" #para que no le agrega una ese en el admin panel de django
+        ordering = ['username']
+    
+    @property
+    def is_superuser(self):
+        #return self.usuario_administrador
+        return self.is_superuser
+
+class Politica_Seguridad(models.Model):
+    id_politica = models.AutoField(primary_key=True)
+    nombre_politica = models.CharField(max_length=50, blank=True)
+    frecuencia_cambio_password = models.IntegerField(default=90,blank=True,null=True, verbose_name="Frecuencia de Cambio de Contraseña")
+    tipo_contrasenia = models.CharField(max_length=1, default='5',
+    choices=[('1','Mínimo 8 carácteres / contener números, mayúsculas, carácter especial'),
+             ('2','Mínimo 8 carácteres / contener números, mayúsculas'),
+             ('3','Mínimo 8 carácteres / contener sólo letras'),
+             ('4','Mínimo 6 carácteres / contener sólo letras'),
+             ('5','Mínimo 4 carácteres ')])
+             
+
+    class Meta:
+        verbose_name_plural = "Políticas de Seguridad" #para que no le agrega una ese en el admin panel de django
+        ordering = ['id_politica']

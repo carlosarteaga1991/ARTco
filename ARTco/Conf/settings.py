@@ -148,6 +148,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"), # _global
 ]
 
+# Para sustituir la clase Usuario por la personalizada
+#AUTH_USER_MODEL = 'Core.User'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

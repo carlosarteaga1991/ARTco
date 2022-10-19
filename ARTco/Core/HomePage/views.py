@@ -2,7 +2,7 @@ from django.shortcuts import *
 from django.views.generic import *
 from django.http import *
 from datetime import datetime
-from Core.HomePage.models import visitas
+from Core.HomePage.models import Visita
 from django.shortcuts import *
 
 import socket
@@ -15,10 +15,6 @@ import requests
 #import folium # instalar para ver la ubicación en un mapa
 
 import platform
-
-
-
-
 
 class HomePageView(TemplateView):
     #model= visitas
