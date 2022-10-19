@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Other apps... para tener datos de un visitante en página web
+    'django_user_agents',
     # apps
     'Core.HomePage',
 ]
@@ -50,7 +52,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # other middlewares...
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
+
+# para tener datos de visitantes en una página web
+# El servidor de caché es opcional, pero se recomienda para acelerar el análisis del agente de usuario
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': '127.0.0.1:8082',
+#    }
+#}
+
+# Nombre del servidor de caché para los agentes de usuario de caché. Si no se especifica por defecto
+# Se usará el alias de caché. Establézcalo en `None` para deshabilitar el almacenamiento en caché.
+USER_AGENTS_CACHE = 'default'
 
 ROOT_URLCONF = 'Conf.urls'
 
