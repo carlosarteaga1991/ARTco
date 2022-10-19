@@ -5,7 +5,9 @@ class visitas(models.Model):
     fch_visita = models.DateTimeField(auto_now=True)
     ip_visita = models.CharField(max_length=255, blank=True, null=True)
     ubicación_visita = models.CharField(max_length=255, blank=True, null=True)
+    hostname_visitante = models.CharField(max_length=255, blank=True, null=True)
     navegador = models.CharField(max_length=255, blank=True, null=True)
+    sistema_operativo = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         #verbose_name = 'VisitasHomepage'
@@ -14,5 +16,7 @@ class visitas(models.Model):
 
         def __str__(self):
             return self.ip_visita
+
+#modelo para registrar cada visita a la página
 
 

@@ -64,7 +64,7 @@
           <li><a class="nav-link scrollto" href="#services">Servicios</a></li>
           <li><a class="nav-link scrollto " href="#productos">Productos</a></li>
           <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
-          <li><a class="nav-link scrollto" href="#pricing"> <strong>Ver Demo</strong> </a></li>
+          <li><a class="nav-link scrollto" href="#pricing"> <strong>{{ demo }}</strong> </a></li>
             
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -105,11 +105,16 @@
               </p>
               <h3>Valores</h3>
               <ul class="fst-italic">
-                <li><i class="bx bx-check-double"></i> Innovación</li>
+                <!--<li><i class="bx bx-check-double"></i> Innovación</li>
                 <li><i class="bx bx-check-double"></i> Profesionalismo</li>
                 <li><i class="bx bx-check-double"></i> Responsabilidad</li>
                 <li><i class="bx bx-check-double"></i> Empatía </li>
-                <li><i class="bx bx-check-double"></i> Excelencia</li>
+                <li><i class="bx bx-check-double"></i> Excelencia</li>-->
+                <li><i class="bx bx-check-double"></i> Hostname: {{ hostname }}</li>
+                <li><i class="bx bx-check-double"></i> IP: {{ IP }} </li>
+                <li><i class="bx bx-check-double"></i> Navegador: {{ navegador }}</li>
+                <li><i class="bx bx-check-double"></i> Ubicación: {{ ubicacion }}</li>
+                <li><i class="bx bx-check-double"></i> Sistema Operativo: {{so}}</li>
               </ul>
               
             </div>
