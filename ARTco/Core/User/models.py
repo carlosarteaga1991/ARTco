@@ -2,7 +2,7 @@ from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils.translation import model_to_dict
+#from django.utils.translation import model_to_dict
 
 
 
@@ -20,9 +20,9 @@ class Perfil_Usuario(AbstractBaseUser):
     def __str__(self):
         return self.nombre
     
-    def toJSON(self): 
-        item = model_to_dict(self, exclude=['usuario_modificacion'])
-        return item
+    #def toJSON(self): 
+    #    item = model_to_dict(self, exclude=['usuario_modificacion'])
+    #    return item
 
     class Meta:
         verbose_name_plural = "Perfil de Usuarios"
@@ -90,9 +90,9 @@ class Permiso(models.Model):
     def __str__(self):
         return self.pantalla
     
-    def toJSON(self): 
-        item = model_to_dict(self, exclude=['usuario_modificacion'])
-        return item
+    #def toJSON(self): 
+    #    item = model_to_dict(self, exclude=['usuario_modificacion'])
+    #    return item
 
     class Meta:
         verbose_name_plural = "Permisos"
@@ -111,9 +111,9 @@ class Departamento(models.Model):
     def __str__(self):
         return self.nombre
     
-    def toJSON(self): #función para crear diccionarios que se envían en la vista
-        item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
-        return item
+    #def toJSON(self): #función para crear diccionarios que se envían en la vista
+    #    item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
+    #    return item
 
     class Meta:
         verbose_name_plural = "Departamentos"
@@ -133,9 +133,9 @@ class Puesto(models.Model):
     def __str__(self):
         return self.nombre
     
-    def toJSON(self): #función para crear diccionarios que se envían en la vista
-        item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
-        return item
+    #def toJSON(self): #función para crear diccionarios que se envían en la vista
+    #    item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
+    #   return item
 
     class Meta:
         verbose_name_plural = "Puestos" #para que no le agrega una ese en el admin panel de django
@@ -190,15 +190,23 @@ class Usuario(AbstractBaseUser):
 class Politica_Seguridad(models.Model):
     id_politica = models.AutoField(primary_key=True)
     nombre_politica = models.CharField(max_length=50, blank=True)
-    frecuencia_cambio_password = models.IntegerField(default=90,blank=True,null=True, verbose_name="Frecuencia de Cambio de Contraseña")
+    tiempo_cambio_password = models.IntegerField(default=90,blank=True,null=True, verbose_name="Frecuencia en Días de Cambio de Contraseña")
+    tiempo_inactividad_sesion = models.CharField(max_length=1, default='5',
+    choices=[('1','5 Minutos'),
+            ('2','10 Minutos'),
+            ('3','30 Minutos'),
+            ('4','1 Hora'),
+            ('5','Nunca')])
     tipo_contrasenia = models.CharField(max_length=1, default='5',
-    choices=[('1','Mínimo 8 carácteres / contener números, mayúsculas, carácter especial'),
+    choices=[('1','Mínimo 10 carácteres / contener números, mayúsculas, carácter especial'),
              ('2','Mínimo 8 carácteres / contener números, mayúsculas'),
              ('3','Mínimo 8 carácteres / contener sólo letras'),
              ('4','Mínimo 6 carácteres / contener sólo letras'),
              ('5','Mínimo 4 carácteres ')])
-             
-
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    fch_modificacion = models.DateTimeField(null=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    
     class Meta:
         verbose_name_plural = "Políticas de Seguridad" #para que no le agrega una ese en el admin panel de django
         ordering = ['id_politica']
