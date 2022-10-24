@@ -125,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Para sustituir la clase Usuario por la personalizada
-AUTH_USER_MODEL = 'User.Usuario'
+AUTH_USER_MODEL = 'User.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
