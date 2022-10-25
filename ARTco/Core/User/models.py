@@ -24,6 +24,7 @@ class Perfil_Usuario(AbstractBaseUser):
     usuario_modificacion = models.IntegerField(blank=True,null=True)
     estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
     borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    slug_perfil_usuario = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
         return self.nombre
@@ -35,6 +36,14 @@ class Perfil_Usuario(AbstractBaseUser):
     class Meta:
         verbose_name_plural = "Perfil de Usuarios"
         ordering = ['id_rol']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug_perfil_usuario:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_perfil_usuario = random.choice("!&%#|£“¡¬-+}{ñ*-())^~$,_:¿?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
 
 class UsuarioManager(BaseUserManager):
     def create_user(self,email,username,nombres,apellidos,id_departamento,id_puesto,password,**other_fields):
@@ -87,7 +96,11 @@ class UsuarioManager(BaseUserManager):
 class Pantalla(models.Model):
     id_pantalla = models.AutoField(primary_key=True)
     nombre_pantalla = models.CharField('Pantalla',max_length=100, unique=True)
+    fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
+    usuario_modificacion = models.IntegerField(blank=True,null=True)
+    slug_pantalla = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
         return self.nombre_pantalla
@@ -96,7 +109,13 @@ class Pantalla(models.Model):
         verbose_name_plural = "Pantallas"
         ordering = ['id_pantalla']
 
-    
+    def save(self, *args, **kwargs):
+        if not self.slug_pantalla:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_pantalla = random.choice("!&%#|£“¡¬-+}{ñ*-())^~$,_:¿?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
 
 class Permiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
@@ -112,6 +131,7 @@ class Permiso(models.Model):
     usuario_modificacion = models.IntegerField(blank=True,null=True)
     estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
     borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
+    slug_permiso = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
         return self.id_pantalla
@@ -123,6 +143,14 @@ class Permiso(models.Model):
     class Meta:
         verbose_name_plural = "Permisos"
         ordering = ['id_permiso']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug_permiso:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_permiso = random.choice("!&%#|£“¡¬-+}{ñ*-())^~$,_:¿?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
 
 class Departamento(models.Model):
     id_departamento = models.AutoField(primary_key=True)
@@ -133,7 +161,7 @@ class Departamento(models.Model):
     usuario_modificacion = models.IntegerField(blank=True,null=True)
     estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
     borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
-    slog_departamento = models.SlugField(max_length=255, blank=True, unique=True)
+    slug_departamento = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
         return self.nombre_departamento
@@ -145,6 +173,14 @@ class Departamento(models.Model):
     class Meta:
         verbose_name_plural = "Departamentos"
         ordering = ['id_departamento']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug_departamento:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_departamento = random.choice("!&%#|£“¡¬-+}{ñ*$-())^~,_:¿?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
 
 class Puesto(models.Model):
     id_puesto = models.AutoField(primary_key=True)
@@ -156,7 +192,7 @@ class Puesto(models.Model):
     usuario_modificacion = models.IntegerField(blank=True,null=True)
     estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
     borrado = models.CharField(max_length=1, default='0',choices=[('1','Si'),('0','No')])
-    slog_puesto = models.SlugField(max_length=255, blank=True, unique=True)
+    slug_puesto = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
         return self.nombre_puesto
@@ -168,6 +204,14 @@ class Puesto(models.Model):
     class Meta:
         verbose_name_plural = "Puestos" #para que no le agrega una ese en el admin panel de django
         ordering = ['id_puesto']
+
+    def save(self, *args, **kwargs):
+        if not self.slug_puesto:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_puesto = random.choice("!&%#|£“¡¬-+}{ñ*-())^~$,_:¿?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
 
 class User(AbstractBaseUser):
     username = models.CharField('Usuario',max_length=20, unique=True)
@@ -196,7 +240,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     superusuario = models.BooleanField(default = False)
     objects = UsuarioManager()
-    slog_usuario = models.SlugField(max_length=255, blank=True)#, unique=True
+    slug_usuario = models.SlugField(max_length=255, blank=True, unique=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','nombres','apellidos','id_departamento','id_puesto']
@@ -220,11 +264,11 @@ class User(AbstractBaseUser):
         return self.is_superuser
 
     def save(self, *args, **kwargs):
-        if not self.slog_usuario:
+        if not self.slug_usuario:
             a=str(uuid.uuid4())
             b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
             c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
-            self.slog_usuario = a + '-' + b + '-' + c
+            self.slug_usuario = random.choice("!&%#|/£“¡¬-+}{ñ*-())^~`,_:¿'?") + a + '-' + b + '-' + c
         return super().save(*args, **kwargs)
 
     
@@ -248,7 +292,18 @@ class Politica_Seguridad(models.Model):
     fch_creacion = models.DateTimeField(auto_now_add=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)
+    slug_politica_seguridad = models.SlugField(max_length=255, blank=True, unique=True)
     
     class Meta:
         verbose_name_plural = "Políticas de Seguridad" #para que no le agrega una ese en el admin panel de django
         ordering = ['id_politica']
+    
+    def save(self, *args, **kwargs):
+        if not self.slug_politica_seguridad:
+            a=str(uuid.uuid4())
+            b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
+            c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
+            self.slug_politica_seguridad = random.choice("!&%#|/£“¡¬-+}{ñ*-())^~`,_:¿'?") + a + '-' + b + '-' + c
+        return super().save(*args, **kwargs)
+    
+    
