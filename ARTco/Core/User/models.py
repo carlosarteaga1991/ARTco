@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-#from django.utils.translation import model_to_dict
+from django.forms import model_to_dict
 
 # para implementar slug
 import uuid
@@ -14,7 +14,7 @@ import random
 
 
 
-class Perfil_Usuario(AbstractBaseUser):
+class Perfil_Usuario(models.Model):
     id_rol = models.AutoField(primary_key=True)
     nombre = models.CharField('Nombre',max_length=100, unique=True)
     tiene_permisos = models.CharField(max_length=2, default='No',choices=[('Si','Si'),('No','No')])
@@ -100,6 +100,7 @@ class Pantalla(models.Model):
     usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField(max_length=1, default='1',choices=[('1','Activo'),('2','Inactivo')])
     slug_pantalla = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
@@ -119,6 +120,7 @@ class Pantalla(models.Model):
 
 class Permiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
+    nombre_permiso = models.CharField('Permiso',max_length=100, unique=True)
     id_rol = models.ForeignKey(Perfil_Usuario,on_delete=models.PROTECT,verbose_name="Perfil de Usuario")
     id_pantalla = models.ForeignKey(Pantalla,on_delete=models.PROTECT,verbose_name="Pantalla")
     ver = models.CharField(max_length=1, default='1',choices=[('1','Si'),('0','No')])
@@ -134,7 +136,7 @@ class Permiso(models.Model):
     slug_permiso = models.SlugField(max_length=255, blank=True, unique=True)
 
     def __str__(self):
-        return self.id_pantalla
+        return self.nombre_permiso
     
     #def toJSON(self): 
     #    item = model_to_dict(self, exclude=['usuario_modificacion'])
@@ -166,9 +168,9 @@ class Departamento(models.Model):
     def __str__(self):
         return self.nombre_departamento
     
-    #def toJSON(self): #función para crear diccionarios que se envían en la vista
-    #    item = model_to_dict(self, exclude=['usuario_modificacion']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
-    #    return item
+    def toJSON(self): #función para crear diccionarios que se envían en la vista
+        item = model_to_dict(self, exclude=['usuario_modificacion','slug_departamento']) # si deseamos excluir ciertos parámetros usamos  como atributo ,exclude['']
+        return item
 
     class Meta:
         verbose_name_plural = "Departamentos"
@@ -181,6 +183,7 @@ class Departamento(models.Model):
             c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
             self.slug_departamento = random.choice("!&%#|£“¡¬-+}{ñ*$-())^~,_:¿?") + a + '-' + b + '-' + c
         return super().save(*args, **kwargs)
+
 
 class Puesto(models.Model):
     id_puesto = models.AutoField(primary_key=True)
@@ -290,10 +293,15 @@ class Politica_Seguridad(models.Model):
              ('4','Mínimo 6 carácteres / contener sólo letras'),
              ('5','Mínimo 4 carácteres ')])
     fch_creacion = models.DateTimeField(auto_now_add=True)
+    usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)
+    estado = models.CharField('Estado',max_length=1,blank=True, default='1',choices=[('1','Activo'),('2','Inactivo')])
     slug_politica_seguridad = models.SlugField(max_length=255, blank=True, unique=True)
     
+    def __str__(self):
+        return self.nombre_politica
+
     class Meta:
         verbose_name_plural = "Políticas de Seguridad" #para que no le agrega una ese en el admin panel de django
         ordering = ['id_politica']
