@@ -30,12 +30,12 @@ class HomePageView(TemplateView):
     error = ""
 
     # Guardando datos de la visita 
-    def guardarVisita(self,ip,ubicacion,hostname,navegador,so,slug):
+    def guardarVisita(self,ip,ubicacion,dispositivo,navegador,so,slug):
         try:
             registro = Visita(
                 ip_visita = str(ip),
                 ubicacion_visita = str(ubicacion),
-                hostname_visitante = str(hostname),
+                dispositivo_visitante = str(dispositivo),
                 navegador = str(navegador),
                 sistema_operativo = str(so),
                 slog_visita = slug
@@ -57,18 +57,38 @@ class HomePageView(TemplateView):
         else:
             browser = browser['browser']['name'] 
         context['navegador'] = str(browser) # este si funciona belleza
+        browser = str(self.request.user_agent.browser.family) + ' ' + str(self.request.user_agent.browser.version)
         # FIN Obtener navegador
 
         # INICIO obtener IP y Ubicación
         rq = geocoder.ip("me")
         context['IP'] = str(rq.ip)
+        ip = str(rq.ip)
         context['ubicacion'] = str(rq.address) +' / Latitud: '+ str(rq.lat) +' / Longitud: '+ str(rq.lng)
+        ubicacion = str(rq.address) +' / Latitud: '+ str(rq.lat) +' / Longitud: '+ str(rq.lng)
+        
         # FIN obtener IP y Ubicación
 
-        #str(socket.gethostbyname(socket.gethostname()) + socket.gethostname())
-        #str(platform.system()) + '/ '+ str(platform.release()) + '/ '+ str(platform.version())
-        #HttpRequest.META('HTTP_USER_AGENT')
-        context['so'] = str(self.request.headers['User-Agent'])
+        dispositivo = ""
+        #context['so'] = str(self.request.headers['User-Agent'])
+        if self.request.user_agent.is_pc:
+            dispositivo = "PC"
+        else:
+            if self.request.user_agent.is_mobile:
+                dispositivo = "Celular"
+            else:
+                if self.request.user_agent.is_tablet:
+                    dispositivo = "Tablet"
+                else:
+                    if self.request.user_agent.is_bot:
+                        dispositivo = "Robot"
+
+        so = str(self.request.user_agent.os.family) +' '+ str(self.request.user_agent.os.version) 
+        context['so'] = so
+
+        #context['so'] = str(self.request.user_agent.device)
+        context['so'] = str(self.request.user_agent.device.family)
+
         # INICIO Generando Slug
         a=str(uuid.uuid4())
         b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
@@ -76,7 +96,7 @@ class HomePageView(TemplateView):
         slug = random.choice("!&%#|£“¡¬-+}{ñ*$-())^~,_:¿?") + a + '-' + b + '-' + c
         # FIN Generando Slug
 
-        self.guardarVisita(str(rq.ip),str(rq.address) +' / Latitud: '+ str(rq.lat) +' / Longitud: '+ str(rq.lng),"",browser,str(self.request.headers['User-Agent']),slug)
+        self.guardarVisita(ip,ubicacion,dispositivo,browser,so,slug)
 
         return context
     

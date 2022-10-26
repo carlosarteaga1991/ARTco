@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Other apps... para tener datos de un visitante en página web
+    # Other apps... para tener datos de un visitante en página web instalar sus librerías
     'django_user_agents',
     # apps
     'Core.HomePage',
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # other middlewares...
-    #'django_user_agents.middleware.UserAgentMiddleware',
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
 
 # para tener datos de visitantes en una página web
