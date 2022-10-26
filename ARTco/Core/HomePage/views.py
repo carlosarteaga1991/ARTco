@@ -38,7 +38,6 @@ class HomePageView(TemplateView):
                 hostname_visitante = str(hostname),
                 navegador = str(navegador),
                 sistema_operativo = str(so),
-                
                 slog_visita = slug
             )
             registro.save()
