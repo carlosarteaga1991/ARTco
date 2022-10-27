@@ -58,7 +58,7 @@ class UserAdmin(admin.ModelAdmin):
         'id_puesto'
     )
     # para ver ciertos campos en el Panel de Administración
-    fields = ['nombres', 'apellidos', 'email', 'username', 'password', 'id_departamento', 'id_puesto','id_rol','primer_ingreso','cambiar_contrasenia','bloqueado','is_active','is_staff','superusuario','estado','borrado']
+    fields = ['nombres', 'apellidos', 'email','fch_ingreso_labores', 'username', 'password', 'id_departamento', 'id_puesto','id_rol','primer_ingreso','cambiar_contrasenia','bloqueado','is_active','is_staff','superusuario','estado','borrado','intentos_fallidos_login']
 
     def save_model(self, request, obj, form, change):
         if obj.password.startswith('pbkdf2'):
@@ -75,7 +75,7 @@ class filtroPoliticaSeguridad(admin.ModelAdmin):
     # y para agregar los filtros de busqueda se colocan los campos q se desan hacer búsqueda
     search_fields = ("nombre_politica","usuario_creacion","estado")
     # para ver ciertos campos en el Panel de Administración
-    fields = ['nombre_politica', 'tiempo_cambio_password','tiempo_inactividad_sesion','tipo_contrasenia', 'estado']
+    fields = ['nombre_politica', 'tiempo_cambio_password','tiempo_inactividad_sesion','tipo_contrasenia', 'estado', 'intentos_fallidos_login']
 admin.site.register(Politica_Seguridad, filtroPoliticaSeguridad)
 
 

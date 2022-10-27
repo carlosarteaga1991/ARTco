@@ -1,8 +1,10 @@
+from ensurepip import version
 from django.shortcuts import *
 from django.views.generic import *
 from django.http import *
 from datetime import datetime
 from Core.HomePage.models import Visita
+from Conf.settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 from django.shortcuts import *
 
 from django.utils.decorators import method_decorator
@@ -17,10 +19,22 @@ import socket
 import httpagentparser
 from geopy.geocoders import Nominatim
 
+from Core.Auditoria.views import *
+
 # para hacer uso de esta librería se necesita internte
 import geocoder # para la ubicación de la visita 
 import requests
 #import folium # instalar para ver la ubicación en un mapa
+
+# Para envío de correo
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from django.template.loader import render_to_string
+
+# Para mensajes de django
+from django.contrib.messages import *
+
 
 import platform
 
@@ -56,7 +70,6 @@ class HomePageView(TemplateView):
             browser = agent.split('/')[0]
         else:
             browser = browser['browser']['name'] 
-        context['navegador'] = str(browser) # este si funciona belleza
         browser = str(self.request.user_agent.browser.family) + ' ' + str(self.request.user_agent.browser.version)
         # FIN Obtener navegador
 
@@ -64,7 +77,6 @@ class HomePageView(TemplateView):
         rq = geocoder.ip("me")
         context['IP'] = str(rq.ip)
         ip = str(rq.ip)
-        context['ubicacion'] = str(rq.address) +' / Latitud: '+ str(rq.lat) +' / Longitud: '+ str(rq.lng)
         ubicacion = str(rq.address) +' / Latitud: '+ str(rq.lat) +' / Longitud: '+ str(rq.lng)
         
         # FIN obtener IP y Ubicación
@@ -75,7 +87,7 @@ class HomePageView(TemplateView):
             dispositivo = "PC"
         else:
             if self.request.user_agent.is_mobile:
-                dispositivo = "Celular"
+                dispositivo = "Móvil"
             else:
                 if self.request.user_agent.is_tablet:
                     dispositivo = "Tablet"
@@ -84,10 +96,8 @@ class HomePageView(TemplateView):
                         dispositivo = "Robot"
 
         so = str(self.request.user_agent.os.family) +' '+ str(self.request.user_agent.os.version) 
-        context['so'] = so
 
-        #context['so'] = str(self.request.user_agent.device)
-        context['so'] = str(self.request.user_agent.device.family)
+        #context['so'] = str(self.request.user_agent.device) 
 
         # INICIO Generando Slug
         a=str(uuid.uuid4())
@@ -100,4 +110,61 @@ class HomePageView(TemplateView):
 
         return context
     
+    # Para envío de correo de Contacto POST
+    def post(self, request, *args, **kwargs):
+        data = {}
+        exitoso = False
+        fallido = False
+        if self.request.POST['action'] == 'contacto':
+            data['name'] = self.request.POST['name']
+            email_dest = self.request.POST['email']
+            asunto_dest = self.request.POST['subject']
+            mensaje_dest = self.request.POST['message']
+            otra_accion = str("Se envió correo de contacto a: " + self.request.POST['name'] + ", al email: " + self.request.POST['email'])
+                
+            #self.enviar_email(email_dest)
+            # INICIO envío de correo
+            try:
+                # Para obtener el dominio completo 
+                # URL = DOMAIN if not DEBUG else self.request.META['HTTP_HOST']
+                mailServer = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+                print(mailServer.ehlo()) # Para ver si hay conexión
+                mailServer.starttls()
+                print(mailServer.ehlo()) # Para ver si hay conexión
+                mailServer.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
+                email_to = email_dest
+                #mensaje = MIMEMultipart()
+                mensaje = MIMEText("este es una prueba")
+                mensaje['From'] = EMAIL_HOST_USER
+                mensaje['To'] = email_to
+                mensaje['Subject'] = 'Info - Arteaga | Corporación'
+                #portillojosue235
+                #ydyiobecdukbxwap gmail
+                #gmgsmywhpqladkjz workspace
+
+                #content = render_to_string('reset_send_email.html', {
+                #    'usuario': email,
+                #    'link_resetpwd': 'http://{}/login/cambiar/contrasenia/{}/'.format(URL, str(email)),
+                #    'link_home': ''
+                #})
+                #content = "prueba enduro"
+                #mensaje.attach(MIMEText(content, 'html'))
+                        
+
+                mailServer.sendmail(EMAIL_HOST_USER,
+                                    email_to,
+                                    mensaje.as_string())
+                data['exitoso'] = "Correo enviado correctamente"
+                Generar_log.guardar_log(self,'HomePage/Contacto','No Aplica','No Aplica','No Aplica',0,0,'Envío de Correo','Exitoso','No Aplica','No Aplica',otra_accion)
+            
+            except Exception as e:
+                data['fallido'] = "Error al enviar solicitud"
+                Generar_log.guardar_log(self,'HomePage/Contacto','No Aplica','No Aplica','No Aplica',0,0,'Envío de Correo','Fallido','No Aplica','No Aplica',otra_accion)
+                data['error'] = str(e)
+            # FIN envío de correo
+
+        return JsonResponse(data)
+
     
+        
+        

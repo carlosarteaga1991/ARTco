@@ -13,15 +13,17 @@ class Visita(models.Model):
     dispositivo_visitante = models.CharField(max_length=255, blank=True, null=True)
     navegador = models.CharField(max_length=255, blank=True, null=True)
     sistema_operativo = models.CharField(max_length=255, blank=True, null=True)
-    slog_visita = models.SlugField(max_length=255, blank=True, unique=True)
+    slug_visita = models.SlugField(max_length=255, blank=True, unique=True)
+
+    def __str__(self):
+        return str(self.ubicacion_visita) + ' / ' + str(self.ip_visita) + ' / ' + str(self.sistema_operativo) + ' / ' + str(self.navegador)
 
     class Meta:
         #verbose_name = 'VisitasHomepage'
         verbose_name_plural = 'HomepageVisitas'
         ordering = ['id']
 
-        def __str__(self):
-            return self.ip_visita
+        
 
     # función para generar el slog antes de guardar el registro
     def save(self, *args, **kwargs):
@@ -29,9 +31,9 @@ class Visita(models.Model):
             a=str(uuid.uuid4())
             b=str(datetime.now()).replace('-','').replace(':','').replace('.','-').replace(' ','-')
             c=random.choice(["a26", "31b", "98c", "d32", "11e", "f09", "28g"]) + random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + str(random.randint(1, 500))
-            self.slog_visita = random.choice("!&%#|/£“¡¬-+}{ñ*-())^~`,_:¿'?") + a + '-' + b + '-' + c
+            self.slug_visita = random.choice("!&%#|/£“¡¬-+}{ñ*-())^~`,_:¿'?") + a + '-' + b + '-' + c
         return super().save(*args, **kwargs)
 
-#modelo para registrar cada visita a la página
+
 
 

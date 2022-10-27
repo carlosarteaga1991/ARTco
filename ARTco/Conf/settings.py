@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # apps
     'Core.HomePage',
     'Core.User',
+    'Core.Auditoria',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,15 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Para envío de correo en producción usar variables globales
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'carteaga@arteagacorporacion.com' #'carteaga338@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'gmgsmywhpqladkjz' #'ydyiobecdukbxwap'
+
+# En producción colocar la url total 
+DOMAIN = ''

@@ -105,16 +105,11 @@
               </p>
               <h3>Valores</h3>
               <ul class="fst-italic">
-                <!--<li><i class="bx bx-check-double"></i> Innovación</li>
+                <li><i class="bx bx-check-double"></i> Innovación</li>
                 <li><i class="bx bx-check-double"></i> Profesionalismo</li>
                 <li><i class="bx bx-check-double"></i> Responsabilidad</li>
                 <li><i class="bx bx-check-double"></i> Empatía </li>
-                <li><i class="bx bx-check-double"></i> Excelencia</li>-->
-                <li><i class="bx bx-check-double"></i> IP: {{ IP }} </li>
-                <li><i class="bx bx-check-double"></i> Navegador: {{ navegador }}</li>
-                <li><i class="bx bx-check-double"></i> Ubicación: {{ ubicacion }}</li>
-                <li><i class="bx bx-check-double"></i> Sistema Operativo: {{so}}</li>
-                <li><i class="bx bx-check-double"></i> Error: {{error}}</li>
+                <li><i class="bx bx-check-double"></i> Excelencia</li>
               </ul>
               
             </div>
@@ -701,8 +696,10 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form" data-aos="fade-left">
+            <!--action="forms/contact.php"-->  
+            <form action="." method="POST" role="form" class="php-email-form" data-aos="fade-left">
+              {% csrf_token %}
+              <input type="hidden" name="action" value='contacto'>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required>

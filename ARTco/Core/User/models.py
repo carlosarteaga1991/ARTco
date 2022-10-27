@@ -228,14 +228,17 @@ class User(AbstractBaseUser):
     ip_ultimo_acceso = models.CharField(max_length=50, blank=True)
     usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_creacion = models.DateTimeField(auto_now_add=True)
+    fch_ingreso_labores = models.DateField('Fecha de Ingreso a Laborar',blank= True, null = True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     fch_cambio_password = models.DateTimeField(blank=True,null=True)
+    fch_ultimo_cambio_password = models.CharField(max_length=70, blank=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)
     estado = models.CharField('Estado',max_length=1,blank=True, default='1',choices=[('1','Activo'),('2','Inactivo')])
     borrado = models.CharField(max_length=1, default='0',blank=True,choices=[('1','Si'),('0','No')])
     primer_ingreso = models.IntegerField(default=1,blank=True,null=True)
     cambiar_contrasenia = models.CharField(max_length=1, default='1',blank=True,choices=[('1','Si'),('0','No')])
     bloqueado = models.CharField(max_length=1, default='0',blank=True,choices=[('1','Bloqueado'),('0','Desbloqueado')])
+    intentos_fallidos_login = models.IntegerField(default=0,blank=True,null=True)
     #img_user = models.ImageField('Imagen de Perfil', height_field=None,width_field=None,blank=True, max_length=200)
     #id_rol = models.ForeignKey(Perfil_Usuario,on_delete=models.PROTECT,blank=True,verbose_name="Perfil de Usuario",null=True)
     id_rol = models.IntegerField(blank=True,null=True,verbose_name="Perfil de Usuario")
@@ -243,6 +246,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     superusuario = models.BooleanField(default = False)
     objects = UsuarioManager()
+    token = models.UUIDField(primary_key=False, editable=False, null=True, blank=True)
     slug_usuario = models.SlugField(max_length=255, blank=True, unique=True)
 
     USERNAME_FIELD = 'username'
@@ -293,6 +297,7 @@ class Politica_Seguridad(models.Model):
              ('4','Mínimo 6 carácteres / contener sólo letras'),
              ('5','Mínimo 4 carácteres ')])
     fch_creacion = models.DateTimeField(auto_now_add=True)
+    intentos_fallidos_login = models.IntegerField(default=3,blank=True,null=True)
     usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)
