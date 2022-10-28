@@ -4,7 +4,7 @@ from django.views.generic import *
 from django.http import *
 from datetime import datetime
 from Core.HomePage.models import Visita
-from Conf.settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+from Conf.settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, DOMAIN
 from django.shortcuts import *
 
 from django.utils.decorators import method_decorator
@@ -116,7 +116,8 @@ class HomePageView(TemplateView):
         exitoso = False
         fallido = False
         if self.request.POST['action'] == 'contacto':
-            data['name'] = self.request.POST['name']
+            #data['name'] = self.request.POST['name']
+            nombre = self.request.POST['name']
             email_dest = self.request.POST['email']
             asunto_dest = self.request.POST['subject']
             mensaje_dest = self.request.POST['message']
@@ -126,39 +127,35 @@ class HomePageView(TemplateView):
             # INICIO envío de correo
             try:
                 # Para obtener el dominio completo 
-                # URL = DOMAIN if not DEBUG else self.request.META['HTTP_HOST']
+                URL = DOMAIN if not DEBUG else self.request.META['HTTP_HOST']
                 mailServer = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
                 print(mailServer.ehlo()) # Para ver si hay conexión
                 mailServer.starttls()
                 print(mailServer.ehlo()) # Para ver si hay conexión
                 mailServer.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
                 email_to = email_dest
-                #mensaje = MIMEMultipart()
-                mensaje = MIMEText("este es una prueba")
+                mensaje = MIMEMultipart()
+                #mensaje = MIMEText("este es una prueba")
                 mensaje['From'] = EMAIL_HOST_USER
                 mensaje['To'] = email_to
                 mensaje['Subject'] = 'Info - Arteaga | Corporación'
-                #portillojosue235
-                #ydyiobecdukbxwap gmail
-                #gmgsmywhpqladkjz workspace
 
-                #content = render_to_string('reset_send_email.html', {
-                #    'usuario': email,
-                #    'link_resetpwd': 'http://{}/login/cambiar/contrasenia/{}/'.format(URL, str(email)),
-                #    'link_home': ''
-                #})
+                content = render_to_string('contacto_correo.html', {
+                    'usuario': nombre,
+                    #'link_resetpwd': 'http://{}/login/cambiar/contrasenia/{}/'.format(URL, str(email)),
+                    'link_home': ''
+                })
                 #content = "prueba enduro"
-                #mensaje.attach(MIMEText(content, 'html'))
+                mensaje.attach(MIMEText(content, 'html'))
                         
 
                 mailServer.sendmail(EMAIL_HOST_USER,
                                     email_to,
                                     mensaje.as_string())
-                data['exitoso'] = "Correo enviado correctamente"
                 Generar_log.guardar_log(self,'HomePage/Contacto','No Aplica','No Aplica','No Aplica',0,0,'Envío de Correo','Exitoso','No Aplica','No Aplica',otra_accion)
             
             except Exception as e:
-                data['fallido'] = "Error al enviar solicitud"
+                data['fallido'] = "Se ha producido un error"
                 Generar_log.guardar_log(self,'HomePage/Contacto','No Aplica','No Aplica','No Aplica',0,0,'Envío de Correo','Fallido','No Aplica','No Aplica',otra_accion)
                 data['error'] = str(e)
             # FIN envío de correo
