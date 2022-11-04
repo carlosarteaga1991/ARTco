@@ -62,6 +62,8 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['demo'] = 'Demo'
         context['error'] = self.error
+        context['homepage_url']= reverse_lazy('HomePage:homepage')
+        context['politicaPrivacidad_url']= reverse_lazy('HomePage:politicaPrivacidad')
 
         # INICIO Obtener el navegador
         agent = self.request.environ.get('HTTP_USER_AGENT')
@@ -162,6 +164,11 @@ class HomePageView(TemplateView):
 
         return JsonResponse(data)
 
+class PoliticaPrivacidadView(TemplateView):
+    template_name = 'Politica_privacidad.html'
     
-        
-        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['demo'] = 'Demo'
+        context['homepage_url']= reverse_lazy('HomePage:homepage')
+        return context
