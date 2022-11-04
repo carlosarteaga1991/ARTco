@@ -1,4 +1,5 @@
 from email.policy import default
+from secrets import choice
 from unittest.util import _MAX_LENGTH
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
@@ -239,6 +240,7 @@ class User(AbstractBaseUser):
     cambiar_contrasenia = models.CharField(max_length=1, default='1',blank=True,choices=[('1','Si'),('0','No')])
     bloqueado = models.CharField(max_length=1, default='0',blank=True,choices=[('1','Bloqueado'),('0','Desbloqueado')])
     intentos_fallidos_login = models.IntegerField(default=0,blank=True,null=True)
+    autenticacion_doble_factor = models.BooleanField(default=False, null=True, choices=[(False,"No"),(True,"Si")])
     #img_user = models.ImageField('Imagen de Perfil', height_field=None,width_field=None,blank=True, max_length=200)
     #id_rol = models.ForeignKey(Perfil_Usuario,on_delete=models.PROTECT,blank=True,verbose_name="Perfil de Usuario",null=True)
     id_rol = models.IntegerField(blank=True,null=True,verbose_name="Perfil de Usuario")
@@ -298,6 +300,9 @@ class Politica_Seguridad(models.Model):
              ('5','Mínimo 4 carácteres ')])
     fch_creacion = models.DateTimeField(auto_now_add=True)
     intentos_fallidos_login = models.IntegerField(default=3,blank=True,null=True)
+    permitir_sesion_duplicada = models.BooleanField(default=False,
+    choices=[(False,'Si'),
+             (True,'No')])
     usuario_creacion = models.IntegerField(blank=True,null=True)
     fch_modificacion = models.DateTimeField(auto_now=True,blank=True,null=True)
     usuario_modificacion = models.IntegerField(blank=True,null=True)

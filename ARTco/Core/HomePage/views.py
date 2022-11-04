@@ -147,7 +147,7 @@ class HomePageView(TemplateView):
                 })
                 #content = "prueba enduro"
                 mensaje.attach(MIMEText(content, 'html'))
-                        
+                        #autenticación de doble factot
 
                 mailServer.sendmail(EMAIL_HOST_USER,
                                     email_to,
