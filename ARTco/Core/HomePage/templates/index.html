@@ -39,7 +39,7 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <a href="index.html" class="hero-logo" data-aos="zoom-in"><img src="{% static 'img/hero-logo.png' %}" alt="" width="130" height="133"></a>
+      <a href="{{homepage_url}}" class="hero-logo" data-aos="zoom-in"><img src="{% static 'img/hero-logo.png' %}" alt="" width="130" height="133"></a>
       <h1 data-aos="zoom-in">&nbsp;&nbsp;&nbsp;&nbsp;ARTEAGA | Corporación</h1>
  
       <h6 data-aos="fade-up" ><span style="color:white" id="maquina-escribir" ></span>.</h6>
@@ -54,7 +54,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div > <!--class="logo"-->
-        <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid" width="133" height="137"></a>
+        <a href="{{homepage_url}}"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid" width="133" height="137"></a>
       </div>
 
       <nav id="navbar" class="navbar">
@@ -63,8 +63,8 @@
           <li><a class="nav-link scrollto" href="#about">Nosotros</a></li>
           <li><a class="nav-link scrollto" href="#services">Servicios</a></li>
           <li><a class="nav-link scrollto " href="#productos">Productos</a></li>
-          <li><a class="nav-link scrollto" href="#team">Equipo</a></li>
-          <li><a class="nav-link scrollto" href="#pricing"> <strong>Ver Demo</strong> </a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Cualidades</a></li>
+          <li><a class="nav-link scrollto" href="#"> <strong>{{ demo }}</strong> </a></li>
             
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -86,7 +86,11 @@
         <div class="row">
           <div class="col-lg-6" data-aos="fade-right">
             <div class="image">
-              <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">
+              <!--<img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">-->
+              <video preload="auto" autoplay muted loop autobuffer width="100%" height="100%" webkit-playsinline playsinline>
+                <source src="{% static 'video/equipo.mp4' %}" type="video/mp4" >
+                <p>Tu navegador no puede mostrar este video.</p>
+              </video>
             </div>
           </div>
           <div class="col-lg-6" data-aos="fade-left">
@@ -100,15 +104,13 @@
               <h3>Misión</h3>
               <p class="fst-italic">
               Ser parte de la incorporación tecnológica hondureña, para fomentar el uso de 
-              sistemas de información que matengan una comunicación eficiente y eficaz hacia los 
-              clientes que se relacionan directa o indirectamente con las pequeñas y medianas empresas.
+              sistemas de información con el fin de optimizar procesos.
               </p>
               <h3>Valores</h3>
               <ul class="fst-italic">
                 <li><i class="bx bx-check-double"></i> Innovación</li>
                 <li><i class="bx bx-check-double"></i> Profesionalismo</li>
                 <li><i class="bx bx-check-double"></i> Responsabilidad</li>
-                <li><i class="bx bx-check-double"></i> Empatía </li>
                 <li><i class="bx bx-check-double"></i> Excelencia</li>
               </ul>
               
@@ -158,12 +160,12 @@
                 el peor de los escenarios ya sea por desastres naturales o provocados por el hombre.
               </p>
             </div>
-          </div>
+          </div>  
           
           <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("{% static 'img/services.jpg' %}");' data-aos="fade-left" data-aos-delay="100"></div>
         </div>
 
-      </div>
+      </div>  
     </section><!-- Fin Sección Servicios -->
 
   
@@ -179,7 +181,7 @@
             <div class="content" data-aos="fade-up">
               <h3>Nuestros <strong>Productos</strong></h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                La integración de todos nuestros productos generan valor agregado a su información, tanto de sus colaboradores como la de sus clientes, para brindar un seguimiento oportuno y fino, detallamos a continuación nuestros productos y su descripción:
               </p>
             </div>
 
@@ -189,7 +191,7 @@
                   <a data-bs-toggle="collapse" class="collapse" data-bs-target="#accordion-list-1"><span>01</span> ARTco - CRM <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-1" class="collapse show" data-bs-parent=".accordion-list">
                     <p>
-                      Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                      El control y seguimiento de cada acción realizada a sus clientes es seguida mediante un software automatizado y centralizado de la información global de sus clientes y la naturaleza de sus operaciones.
                     </p>
                   </div>
                 </li>
@@ -198,7 +200,7 @@
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-2" class="collapsed"><span>02</span> ARTco - RRHH<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-2" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                      Automatiza la Gestión del Talento Humano, empleando las mejores prácticas del mercado con el fin de lograr el desarrollo de equipos de trabajo que se superen constantemente y lograr tener centralizado toda la información de sus colaboradores ya sea a nivel de una sola empresa o multiempresa.
                     </p>
                   </div>
                 </li>
@@ -207,7 +209,7 @@
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-3" class="collapsed"><span>03</span> ARTco - Inventario/Facturación <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-3" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                      Concentrarás la esencia de tu empresa y su crecimiento, teniendo un control en tiempo real de todo el inventario para mantener una estructura ordenada y reducir el timepo en el manejo de tu inventario.
                     </p>
                   </div>
                 </li>
@@ -216,7 +218,7 @@
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-4" class="collapsed"><span>04</span> ARTco - Gestión de Cobros <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-4" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                      El seguimiento oportuno de cada cliente para aplicar la debida diligencia en cobros es ideal que sea automatizado para ir generando un historial en un sistema centralizado y poder cubrir con las metas propuestas mes a mes.
                     </p>
                   </div>
                 </li>
@@ -225,7 +227,7 @@
                   <a data-bs-toggle="collapse" data-bs-target="#accordion-list-5" class="collapsed"><span>05</span> ARTco - Gestión de Ventas <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
                   <div id="accordion-list-5" class="collapse" data-bs-parent=".accordion-list">
                     <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                      El seguimiento oportuno de cada cliente para aplicar la debida diligencia en ventas es ideal que sea automatizado para ir generando un historial en un sistema centralizado y poder cubrir con las metas propuestas mes a mes.
                     </p>
                   </div>
                 </li>
@@ -235,8 +237,8 @@
 
           </div>
 
-          <div class="col-lg-5 order-1 order-lg-2 align-items-stretch video-box" style='background-image: url("{% static 'img/why-us.jpg' %}");' data-aos="zoom-in">
-            <a href="https://www.youtube.com/watch?v=LIqQNG_q2us" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true"></a>
+          <div class="col-lg-5 order-1 order-lg-2 align-items-stretch video-box" style='background-image: url("{% static 'img/why-us.jpg' %}");' >
+            
           </div>
 
         </div>
@@ -245,21 +247,21 @@
     </section><!-- End Why Us Section -->
 
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio" >
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Características de nuestros principales productos</h2>
-          <p>Selecciona un módulo para ver sus características:</p>
+          <h2>Cualidades de nuestros servicios y productos</h2>
+          <p>Selecciona cada uno:</p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-12 d-flex justify-content-center">
             <ul id="portfolio-flters">
               <li data-filter="*" class="filter-active">Todos</li>
-              <li data-filter=".filter-app">Módulo de Seguridad</li>
-              <li data-filter=".filter-card">Módulo Administrativo</li>
-              <li data-filter=".filter-web">Módulo de Auditoría</li>
+              <li data-filter=".filter-app">Seguridad</li>
+              <li data-filter=".filter-card">Escalable</li>
+              <li data-filter=".filter-web">Fácil uso</li>
             </ul>
           </div>
         </div>
@@ -268,13 +270,12 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-1.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/confiabilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Confiabilidad</h4>
+                <p>El software opera bajo estándares de ingeniería de software confiables.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/confiabilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>CONFIABILIDAD</b>: El software opera bajo estándares de ingeniería de software confiables."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -282,13 +283,13 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-2.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/productividad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
+                <h4>Productivilidad</h4>
+                <p>Sus procesos son adaptados con el fin de generar eficiencia ya sea de manera colectiva o individual.</p>
                 <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-2.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                  <br>
+                  <a href="{% static 'img/portfolio/productividad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>PRODUCTIVIDAD</b>: Sus procesos son adaptados con el fin de generar eficiencia ya sea de manera colectiva o individual."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -296,13 +297,13 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-3.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/robustez.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Robustez</h4>
+                <p>El software se comporta de forma razonable aún en circunstancias que no fueron anticipadas
+                  en la especificación de requerimientos.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/robustez.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>ROBUSTEZ</b>: El software se comporta de forma razonable aún en circunstancias que no fueron anticipadas en la especificación de requerimientos."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -310,13 +311,12 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-4.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/amigabilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 2</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-4.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Amigabilidad</h4>
+                <p>El software mantiene una interfaz de usuario de fácil entendimiento.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/amigabilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>AMIGABILIDAD</b>: El software mantiene una interfaz de usuario de fácil entendimiento."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -324,27 +324,26 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-5.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/interoperabilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 2</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-5.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Interoperabilidad</h4>
+                <p>Mantiene la habilidad de coexistir y cooperar con los demás módulos dentro del software.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/interoperabilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>INTEROPERABILIDAD</b>: Mantiene la habilidad de coexistir y cooperar con los demás módulos dentro del software."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
+            
           </div>
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-6.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/performance.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>App</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-6.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Performance</h4>
+                <p>Uso de los recursos informáticos en la nube de manera económica.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/performance.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>PERFORMANCE</b>: Uso de los recursos informáticos en la nube de manera económica."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -352,13 +351,12 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-7.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/mantenibilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 1</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-7.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Mantenibilidad</h4>
+                <p>Generación de cambios según requermientos nuevos o modificaciones a los existentes.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/mantenibilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>MANTENIBILIDAD</b>: Generación de cambios según requermientos nuevos o modificaciones a los existentes."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -366,13 +364,12 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-card">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-8.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/portabilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Card 3</h4>
-                <p>Card</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-8.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Portabilidad</h4>
+                <p>Puede ser ejecutado en plataformas web ya sea en dispositivos móviles o de escritorio.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/portabilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>PORTABILIDAD</b>: Puede ser ejecutado en plataformas web ya sea en dispositivos móviles o de escritorio."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -380,13 +377,12 @@
 
           <div class="col-lg-4 col-md-6 portfolio-item filter-web">
             <div class="portfolio-wrap">
-              <img src="{% static 'img/portfolio/portfolio-9.jpg' %}" class="img-fluid" alt="">
+              <img src="{% static 'img/portfolio/comprensibilidad.jpg' %}" class="img-fluid" alt="">
               <div class="portfolio-info">
-                <h4>Web 3</h4>
-                <p>Web</p>
-                <div class="portfolio-links">
-                  <a href="{% static 'img/portfolio/portfolio-9.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                <h4>Comprensibilidad</h4>
+                <p>Su comportamiento es predecible y genera amigabilidad al usuario según sus procesos adaptados.</p>
+                <div class="portfolio-links"><br>
+                  <a href="{% static 'img/portfolio/comprensibilidad.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="<b>COMPRENSIBILIDAD</b>: Su comportamiento es predecible y genera amigabilidad al usuario según sus procesos adaptados."><FONT SIZE=3><i>Ver</i></FONT SIZE=3></a>
                 </div>
               </div>
             </div>
@@ -410,57 +406,26 @@
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  La incorporación de procesos tecnológicos automatizados en una empresa, representan avance para lograr el éxito empresarial.
                 </p>
-                <img src="{% static 'img/testimonials/testimonials-1.jpg' %}" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+                <img src="{% static 'img/testimonials/perfil.jpg' %}" class="testimonial-img" alt="">
+                <h3>Carlos Arteaga</h3>
+                <h4>CEO &amp; Fundador</h4>
               </div>
             </div><!-- End testimonial item -->
 
             <div class="swiper-slide">
               <div class="testimonial-item">
                 <p>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  El control y establecimiento de procesos adecuados dentro de una empresa generarán valor en cada actividad.
                 </p>
-                <img src="{% static 'img/testimonials/testimonials-2.jpg' %}" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+                <img src="{% static 'img/testimonials/perfil.jpg' %}" class="testimonial-img" alt="">
+                <h3>Carlos Arteaga</h3>
+                <h4>CEO &amp; Fundador</h4>
               </div>
             </div><!-- End testimonial item -->
 
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                </p>
-                <img src="{% static 'img/testimonials/testimonials-3.jpg' %}" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                </p>
-                <img src="{% static 'img/testimonials/testimonials-4.jpg' %}" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                </p>
-                <img src="{% static 'img/testimonials/testimonials-5.jpg' %}" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
+            
 
           </div>
           <div class="swiper-pagination"></div>
@@ -516,81 +481,6 @@
       </div>
     </section><!-- Fin Nuestras Tecnologías -->
 
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Team</h2>
-          <p>Magnam dolores commodi suscipit eius consequatur ex aliquid fuga eum quidem</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="zoom-in">
-              <div class="member-img">
-                <img src="{% static 'img/team/team-1.jpg' %}" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-                <p>Animi est delectus alias quam repellendus nihil nobis dolor. Est sapiente occaecati et dolore. Omnis aut ut nesciunt explicabo qui. Eius nam deleniti ut omnis</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="zoom-in" data-aos-delay="100">
-              <div class="member-img">
-                <img src="{% static 'img/team/team-2.jpg' %}" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-                <p>Aspernatur iste esse aliquam enim et corporis. Molestiae voluptatem aut eligendi quis aut. Libero vel amet voluptatem eos rerum non doloremque</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="zoom-in" data-aos-delay="200">
-              <div class="member-img">
-                <img src="{% static 'img/team/team-3.jpg' %}" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-                <p>Ut enim possimus nihil cupiditate beatae. Veniam facere quae non qui necessitatibus rerum eos vero. Maxime sit sunt quo dolor autem est qui quaerat</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Team Section -->
-
-
-
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq">
       <div class="container">
@@ -605,7 +495,9 @@
             <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#faq1">¿Cuál es la diferencia entre un software a medida y uno empaquetado? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                <b>El software a medida</b> tiene su tiempo de desarrollo, se adapta a las necesidades específicas de la empresa en general, es más caro que el software estándar.
+                <br><br>
+                <b>El software empaquetado</b> ya fue desarrollado, la empresa lo compra ya hecho, suele ser más barato que el software a medida, probablemente tenga muchas funciones que no la empresa no usará; además a veces no se adapta completamente a las necesidades de una empresa.
               </p>
             </div>
           </li>
@@ -614,7 +506,7 @@
             <a data-bs-toggle="collapse" data-bs-target="#faq2" class="collapsed">¿Cuáles son los beneficios de alojamiento de una plataforma tecnológica en la nube? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq2" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                Bajo costo de infraestructura bajo demanda, soporte de ciberseguridad, servicio personalizado, constante actualización de licencias, servicio las 24 horas.
               </p>
             </div>
           </li>
@@ -623,7 +515,7 @@
             <a data-bs-toggle="collapse" data-bs-target="#faq3" class="collapsed">¿Cuál es la importancia de gestionar los riesgos y la continuidad del negocio en una empresa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq3" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                Su fin es proteger a su empresa sobre cualquier tipo de desastre que pueda tener repercusiones ante sus procesos críticos, así como saber responder ante un desastre ya sea externo o interno generando un tener un plan de acción para todos los riesgos y su mitigación, en ambos casos estos métodos son probados para continuar con la operativa normal.
               </p>
             </div>
           </li>
@@ -632,7 +524,16 @@
             <a data-bs-toggle="collapse" data-bs-target="#faq4" class="collapsed">¿Qué tipo de seguridad cibernética debe tener un software en la nube? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq4" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                <br>
+                <dt>Seguridad en base a:</dt>
+                <br>
+                <dd>1. Seguridad física con el proveedor</dd>
+                <dd>2. Inteligencia, vigilancia y prevención de amenazas</dd>
+                <dd>3. Cifrado</dd>
+                <dd>4. Pruebas de vulnerabilidad y penetración</dd>
+                <dd>5. Microsegmentación (Dividir el despliegue en la nube)</dd>
+                <dd>6. Cortafuegos/Firewall</dd>
+                </dl>
               </p>
             </div>
           </li>
@@ -641,19 +542,11 @@
             <a data-bs-toggle="collapse" data-bs-target="#faq5" class="collapsed">¿Qué tipo de políticas de seguridad deben existir para manejar la información y su acceso? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
             <div id="faq5" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                Políticas de hardening, protección de claves, encriptación, periodicidad de backup, almacenamiento y gobernanza de datos.
               </p>
             </div>
           </li>
 
-          <li data-aos="fade-up" data-aos-delay="500">
-            <a data-bs-toggle="collapse" data-bs-target="#faq6" class="collapsed">¿Quién debe ser el encargado de administrar las políticas de seguridad en una empresa? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-x icon-close"></i></a>
-            <div id="faq6" class="collapse" data-bs-parent=".faq-list">
-              <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-              </p>
-            </div>
-          </li>
 
         </ul>
 
@@ -696,8 +589,10 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form" data-aos="fade-left">
+            <!--action="forms/contact.php"-->  
+            <form action="." method="POST" role="form" class="php-email-form" data-aos="fade-left">
+              {% csrf_token %}
+              <input type="hidden" name="action" value='contacto'>
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required>
@@ -714,16 +609,13 @@
               </div>
               <div class="my-3">
                 <div class="loading">Cargando</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Tu mensaje ha sido enviado. Muchas Gracias!</div>
+                    <div class="sent-message">¡Enviado con éxito! <br> Si su correo es válido, recibirá una confirmación.</div>
+                    <div class="error-message">Se ha producido un error</div>
               </div>
               <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
             </form>
-
           </div>
-
         </div>
-
       </div>
     </section><!-- End Contact Section -->
 
@@ -738,7 +630,7 @@
 
         <div class="row justify-content-center">
           <div class="col-lg-6" >
-            <a href="#header" class="scrollto footer-logo" ><img src="{% static 'img/hero-logo.png' %}" alt="" ></a>
+            <a href="{{homepage_url}}" class="scrollto footer-logo" ><img src="{% static 'img/hero-logo.png' %}" alt="" ></a>
             <h3>ART | co&nbsp;&nbsp;&nbsp;&nbsp;</h3>
             <p>"Las grandes oportunidades nacen de haber sabido aprovechar las pequeñas"</p>
           </div>
@@ -752,9 +644,13 @@
         &copy; Copyright <strong><span>ART|co</span></strong>. Todos los Derechos Reservados
       </div>
       <div class="credits">
-        Desarrollado por <a href="index.html">Arteaga|Corporación</a>
+        Desarrollado por <a href="{{homepage_url}}">Arteaga|Corporación</a>
+        <b>|</b>
+        <font size=2><a href="{{politicaPrivacidad_url}}" >Política de Privacidad</a></font size=2>
       </div>
+        
     </div>
+    
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

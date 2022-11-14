@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Other apps... para tener datos de un visitante en página web instalar sus librerías
+    'django_user_agents',
     # apps
     'Core.HomePage',
+    'Core.User',
+    'Core.Auditoria',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +54,22 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # other middlewares...
+    'django_user_agents.middleware.UserAgentMiddleware',
 ]
+
+# para tener datos de visitantes en una página web
+# El servidor de caché es opcional, pero se recomienda para acelerar el análisis del agente de usuario
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+#        'LOCATION': '127.0.0.1:8082',
+#    }
+#}
+
+# Nombre del servidor de caché para los agentes de usuario de caché. Si no se especifica por defecto
+# Se usará el alias de caché. Establézcalo en `None` para deshabilitar el almacenamiento en caché.
+#USER_AGENTS_CACHE = 'default'
 
 ROOT_URLCONF = 'Conf.urls'
 
@@ -106,6 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Para sustituir la clase Usuario por la personalizada
+AUTH_USER_MODEL = 'User.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -131,7 +152,21 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"), # _global
 ]
 
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Para envío de correo en producción usar variables globales
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'carteaga@arteagacorporacion.com' #'carteaga338@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'gmgsmywhpqladkjz' #'ydyiobecdukbxwap'
+
+# En producción colocar la url total 
+DOMAIN = ''
