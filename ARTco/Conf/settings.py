@@ -164,9 +164,9 @@ EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = 587
 
-EMAIL_HOST_USER = 'carteaga@arteagacorporacion.com' #'carteaga338@gmail.com'
+EMAIL_HOST_USER = 'carteaga@arteagacorporacion.com' 
 
-EMAIL_HOST_PASSWORD = 'gmgsmywhpqladkjz' #'ydyiobecdukbxwap'
+EMAIL_HOST_PASSWORD = 'gmgsmywhpqladkjz' 
 
 # En producción colocar la url total 
 DOMAIN = ''
